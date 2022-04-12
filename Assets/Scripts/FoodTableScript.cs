@@ -27,4 +27,6 @@ public class FoodTableScript : BaseTableScript
             CopyObject.transform.parent = Character.transform.GetChild(0);
         }
     }
+
+    
 }

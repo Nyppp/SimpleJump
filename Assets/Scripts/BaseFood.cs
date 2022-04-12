@@ -20,8 +20,11 @@ public class BaseFood : MonoBehaviour
     {
         if (this.transform.parent != null)
         {
+            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
             this.GetComponent<Collider>().enabled = false;
             this.GetComponent<Rigidbody>().useGravity = false;
+
             this.transform.position = this.transform.parent.gameObject.transform.position;
         }
 
@@ -30,10 +33,5 @@ public class BaseFood : MonoBehaviour
             this.GetComponent<Collider>().enabled = true;
             this.GetComponent<Rigidbody>().useGravity = true;
         }
-
-        //TODO LIST
-        //if food was thrown,
-        //collision enterd at Interaction Box's DropPoint,
-        //set Food's transform parent that
     }
 }

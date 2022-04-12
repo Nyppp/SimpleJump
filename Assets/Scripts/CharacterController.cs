@@ -8,16 +8,21 @@ public class CharacterController : MonoBehaviour
     Rigidbody CharacterRigidBody;
     Vector3 MoveToVector;
     float RotationValue;
-    public float MoveSpeed = 1.0f;
-    public float RotationSpeed = 1.0f;
     float moveZ;
     float moveX;
+
+    public float MoveSpeed = 1.0f;
+    public float RotationSpeed = 1.0f;
+    public float ThrowSpeed = 100.0f;
     public GameObject GrabPoint;
 
-    
+
+
     //레이캐스팅 변수
     RaycastHit Hit;
     public float HitDistance = 5.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,8 +42,10 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-
+            Action();
         }
+
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 
     //물리연산, 고정프레임이 필요한 연산
@@ -105,6 +112,23 @@ public class CharacterController : MonoBehaviour
     //TODO : if character grabbing food, throw away food.
     void Action()
     {
-
+        if (GrabPoint.transform.childCount > 0)
+        {
+            Vector3 ThrowDirection = this.transform.forward + new Vector3(0, 0.2f, 0);
+            GrabPoint.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(ThrowDirection.normalized * ThrowSpeed);
+            GrabPoint.transform.GetChild(0).parent = null;
+        }
+        
+        else
+        {
+            Vector3 CastPosition = transform.position - new Vector3(0, 0.5f, 0);
+            if (Physics.Raycast(CastPosition, transform.forward, out Hit, HitDistance))
+            {
+                if(Hit.transform.gameObject.GetComponent<KnifeTable>() != null)
+                {
+                    Hit.transform.gameObject.GetComponent<KnifeTable>().KnifeFunction(this.gameObject);
+                }
+            }
+        }
     }
 }

@@ -54,9 +54,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CharacterController.cs" />
-    <Compile Include="Assets\Scripts\BaseTableScript.cs" />
     <Compile Include="Assets\Scripts\FoodTableScript.cs" />
     <Compile Include="Assets\Scripts\BaseFood.cs" />
+    <Compile Include="Assets\Scripts\BaseTableScript.cs" />
+    <Compile Include="Assets\Scripts\DropPoint.cs" />
+    <Compile Include="Assets\Scripts\KnifeTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
