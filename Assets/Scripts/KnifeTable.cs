@@ -24,7 +24,7 @@ public class KnifeTable : BaseTableScript
         base.TableFunction(Character);
     }
 
-    //Ä®Áú Å°(ÁÂ ÄÁÆ®·Ñ) ´©¸£¸é Ä®Áú ½ÃÀÛ, flag º¯¼ö¸¦ true·Î ¸¸µê
+    //Ä®Áú Å°(ÁÂ ÄÁÆ®·Ñ) ´©¸£¸é Ä®Áú ½ÃÀÛ, flagº¯¼ö(UsingKnife)¸¦ true·Î ¸¸µê
     public void KnifeFunction(GameObject Character)
     {
         if(this.transform.GetChild(0).childCount > 0)

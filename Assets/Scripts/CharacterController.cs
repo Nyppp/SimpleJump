@@ -29,23 +29,25 @@ public class CharacterController : MonoBehaviour
         CharacterRigidBody = gameObject.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame -> 물리적 반응이 필요없는 연산
+    // Update is called once per frame , 물리적 반응이 필요없는 연산
     void Update()
     {
         moveZ = Input.GetAxis("Vertical");
         moveX = Input.GetAxis("Horizontal");
 
+        //상호작용 : 식재료 줍기, 물건 내려놓기 등
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Interaction();
         }
 
+        //액션 : 칼질, 소화기 발사 등
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Action();
         }
 
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
+        //Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 
     //물리연산, 고정프레임이 필요한 연산
@@ -59,6 +61,8 @@ public class CharacterController : MonoBehaviour
     void Move()
     {
         MoveToVector.Set(moveX, 0, moveZ);
+
+        //입력값에 대한 벡터(x축과 z축)를 정규화 시킨 다음, 시간값과 이동 속도를 곱함 -> 프레임에 독립적인 이동
         MoveToVector = MoveToVector.normalized * MoveSpeed * Time.deltaTime;
 
         CharacterRigidBody.MovePosition(transform.position + MoveToVector);
@@ -90,11 +94,14 @@ public class CharacterController : MonoBehaviour
         //박스와 상호작용
         if (Physics.Raycast(CastPosition, transform.forward, out Hit, HitDistance))
         {
+            //레이캐스트에 걸린 오브젝트가 상자 액터라면, 그 상자의 고유한 함수 실행
+            //TableFunction은 가상함수로, 파생되는 자식 클래스마다 각자의 기능 존재
             if(Hit.transform.gameObject.GetComponent<BaseTableScript>() != null)
             {
                 Hit.transform.gameObject.GetComponent<BaseTableScript>().TableFunction(this.gameObject);
             }
 
+            //오브젝트가 음식이라면, 그 음식을 주움
             if(Hit.transform.gameObject.CompareTag("Food"))
             {
                 Hit.transform.parent = GrabPoint.transform;
@@ -109,9 +116,10 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    //TODO : if character grabbing food, throw away food.
+    //TODO : if character grabbing food, throw away.
     void Action()
     {
+        //액션 키(좌 컨트롤)를 눌렀을 때, 음식을 들고 있다면 플레이어가 보는 방향으로 던짐
         if (GrabPoint.transform.childCount > 0)
         {
             Vector3 ThrowDirection = this.transform.forward + new Vector3(0, 0.2f, 0);
@@ -121,6 +129,7 @@ public class CharacterController : MonoBehaviour
         
         else
         {
+            //그 외에 식재료 손질(칼질) 동작
             Vector3 CastPosition = transform.position - new Vector3(0, 0.5f, 0);
             if (Physics.Raycast(CastPosition, transform.forward, out Hit, HitDistance))
             {

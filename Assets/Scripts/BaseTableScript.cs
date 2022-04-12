@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BaseTableScript : MonoBehaviour
 {
+    //음식을 둘 수 있는 공간
     public GameObject DropPoint;
+
     // Start is called before the first frame update
 
     void Start()
