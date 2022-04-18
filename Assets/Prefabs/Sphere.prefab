@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2676157105496346067}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Food
+  m_TagString: Grabable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,3 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c477d9e860ee247941feba7e727754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeshArray:
+  - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  Grabable: 1
+  Cooked: 0
+  CookTime: 3
