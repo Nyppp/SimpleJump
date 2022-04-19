@@ -19,7 +19,7 @@ public class Dish : MonoBehaviour
         
     }
 
-    public void PutInFood(BaseFood Food)
+    public virtual void PutInFood(BaseFood Food)
     {
         if(Food.Cooked == true)
         {
