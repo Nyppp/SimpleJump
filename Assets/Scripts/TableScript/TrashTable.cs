@@ -25,6 +25,7 @@ public class TrashTable : BaseTableScript
                 Dish CurrentDish = Character.transform.GetChild(0).GetChild(0).GetComponent<Dish>();
                 if (CurrentDish.transform.GetChild(0).childCount > 0)
                 {
+                    Debug.Log("접시 / 냄비에 담긴 음식 버림");
                     Destroy(CurrentDish.transform.GetChild(0).GetChild(0).gameObject);
                 }
             }

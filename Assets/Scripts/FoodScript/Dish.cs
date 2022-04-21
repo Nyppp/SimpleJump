@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum FoodList { Cavage, Carrot, Meet};
+
 public class Dish : MonoBehaviour
 {
     //음식을 둘 수 있는 공간

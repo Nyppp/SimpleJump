@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\FoodScript\Dish.cs" />
+    <Compile Include="Assets\Scripts\FoodScript\Pod.cs" />
     <Compile Include="Assets\Scripts\ControllScript\CharacterController.cs" />
     <Compile Include="Assets\Scripts\ControllScript\DropPoint.cs" />
     <Compile Include="Assets\Scripts\TableScript\FoodTableScript.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="Assets\Scripts\FoodScript\BaseFood.cs" />
     <Compile Include="Assets\Scripts\ControllScript\DishPoint.cs" />
     <Compile Include="Assets\Scripts\TableScript\BaseTableScript.cs" />
-    <Compile Include="Assets\Scripts\FoodScript\Pod.cs" />
+    <Compile Include="Assets\Scripts\TableScript\GasStove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
