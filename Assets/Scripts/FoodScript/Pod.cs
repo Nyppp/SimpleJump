@@ -5,7 +5,7 @@ using UnityEngine;
 public class Pod : Dish
 {
     //화구에 이 시간보다 오래 있으면, 냄비에 불이 나면서 탄 음식이 됨
-    public float BoilTime = 5;
+    public float BoilTime = 7.0f;
     public float CurrentBoilTime;
 
     // Start is called before the first frame update
