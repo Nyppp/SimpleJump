@@ -7,7 +7,10 @@ public class BaseFood : MonoBehaviour
     //손질(칼질, 굽기 등) 전 식재료의 겉모습과 후의 모습을 담는 mesh배열 
     public Mesh[] MeshArray;
     private MeshFilter meshfilter;
+
     public bool Grabable = true;
+    public bool Cutable = true;
+    public bool Mixable = true;
 
     public bool Cooked = false;
     public float CookTime = 5.0f;

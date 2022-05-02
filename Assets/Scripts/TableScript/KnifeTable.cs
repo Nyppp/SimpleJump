@@ -8,6 +8,9 @@ public class KnifeTable : BaseTableScript
     public Image CookBar;
     bool UsingKnife = false;
 
+    public List<BaseFood> CutableFood;
+    
+
     BaseFood Food;
 
     // Start is called before the first frame update
@@ -40,9 +43,11 @@ public class KnifeTable : BaseTableScript
     //칼질 키(좌 컨트롤) 누르면 칼질 시작, flag변수(UsingKnife)를 true로 만듦
     public void KnifeFunction(GameObject Character)
     {
+
         Food = this.transform.GetChild(0).GetChild(0).GetComponent<BaseFood>();
 
-        if (Food != null && Food.Cooked == false)
+
+        if (Food != null && Food.Cooked == false && Food.Cutable == true)
         {
             Food.Grabable = false;
             UsingKnife = true;

@@ -64,7 +64,6 @@ public class CharacterController : MonoBehaviour
 
         //입력값에 대한 벡터(x축과 z축)를 정규화 시킨 다음, 시간값과 이동 속도를 곱함 -> 프레임에 독립적인 이동
         MoveToVector = MoveToVector.normalized * MoveSpeed * Time.deltaTime;
-
         CharacterRigidBody.MovePosition(transform.position + MoveToVector);
     }
 
@@ -73,7 +72,6 @@ public class CharacterController : MonoBehaviour
     {
         if (moveX == 0 && moveZ == 0)
         {
-            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
             return;
         }
 

@@ -17,29 +17,15 @@ public class Pod : Dish
     // Update is called once per frame
     void Update()
     {
-        //냄비를 소유한 부모 오브젝트가 화구가 아니라면, currentboiltime 원상복구.
-        if (this.transform.parent.parent.gameObject.GetComponent<GasStove>() == null)
+        //냄비를 소유한 부모 오브젝트가 반죽기가 아니라면, currentboiltime 원상복구.
+        if (this.transform.parent.parent.gameObject.GetComponent<Kneader>() != null)
         {
-            CurrentBoilTime = BoilTime;
-        }
-
-        else
-        {
-            if (CurrentBoilTime > 0)
-            {
-                CurrentBoilTime -= Time.deltaTime;
-                Debug.Log("" + CurrentBoilTime);
-            }
-            else
-            {
-                Debug.Log("불이야!");
-            }
+            CurrentBoilTime -= Time.deltaTime;
         }
     }
 
     public override void PutInFood(BaseFood Food)
     {
-        Debug.Log(""+DishPoint);
         if(DishPoint.transform.childCount == 0)
         {
             Food.transform.position = DishPoint.transform.position;

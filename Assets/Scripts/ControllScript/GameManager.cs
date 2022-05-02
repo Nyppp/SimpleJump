@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public Text ScoreText;
     public int Score;
 
+    public GameObject SpawnPoint;
+
+
     void Awake()
     {
         if (null == Gameinstance)
@@ -49,11 +52,21 @@ public class GameManager : MonoBehaviour
     {
         Score = 0;
         ScoreText.text = Score.ToString();
+
+        //TODO : 식기도구 위치를 배열 혹은 리스트 형식으로 저장하고 도구 생성
     }
+
+    //TODO : 식기도구가 추락하여 사라지면 앞서 생성한 리스트를 둘러보며
+    //빈자리가 있는 공간에 도구 생성하는 함수
 
     // Update is called once per frame
     void Update()
     {
         ScoreText.text = Score.ToString();
+    }
+
+    public void PlayerRevive(GameObject Player)
+    {
+        Player.transform.position = SpawnPoint.transform.position;
     }
 }
