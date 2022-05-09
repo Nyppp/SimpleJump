@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Grabable
   - Dish
+  - Table
   layers:
   - Default
   - TransparentFX

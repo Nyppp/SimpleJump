@@ -41,11 +41,10 @@ public class KnifeTable : BaseTableScript
     }
 
     //칼질 키(좌 컨트롤) 누르면 칼질 시작, flag변수(UsingKnife)를 true로 만듦
-    public void KnifeFunction(GameObject Character)
+    public override void TableAction(GameObject Character) 
     {
 
-        Food = this.transform.GetChild(0).GetChild(0).GetComponent<BaseFood>();
-
+        Food = this.DropPoint.GetComponentInChildren<BaseFood>();
 
         if (Food != null && Food.Cooked == false && Food.Cutable == true)
         {
@@ -61,8 +60,8 @@ public class KnifeTable : BaseTableScript
     {
         if(UsingKnife == true)
         {
-            Food.GetComponent<BaseFood>().CookFood();
-            CookBar.transform.GetChild(0).GetComponent<Image>().fillAmount = 1.0f - ( Food.GetComponent<BaseFood>().CookTime / 5.0f );
+            Food.CookFood();
+            CookBar.transform.GetChild(0).GetComponent<Image>().fillAmount = 1.0f - ( Food.CookTime / 5.0f );
 
             if (Food.GetComponent<BaseFood>().Cooked == true)
             {

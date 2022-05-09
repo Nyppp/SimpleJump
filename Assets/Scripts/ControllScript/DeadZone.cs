@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-
-    public bool isDelay = false;
     public float DelayTime = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +24,8 @@ public class DeadZone : MonoBehaviour
         {
             //플레이어가 죽었다면 코루틴을 통해 5초 뒤 시작지점에서 부활
             case "Player":
-                ReviveDelay(other.gameObject);
+                Debug.Log("플레이어 낙사");
+                StartCoroutine(ReviveDelay(other.gameObject));
                 break;
 
             //도구(접시, 소화기 등)이 바닥에 떨어졌다면 5초 뒤 원래 있던 자리로 재생성
@@ -42,6 +42,7 @@ public class DeadZone : MonoBehaviour
         
     }
 
+    //플레이어 부활 처리에 대한 코루틴, DelayTime 이후에 spawnPoint로 플레이어를 이동시킴
     IEnumerator ReviveDelay(GameObject Player)
     {
         yield return new WaitForSecondsRealtime(DelayTime);

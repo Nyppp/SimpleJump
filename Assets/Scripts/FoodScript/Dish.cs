@@ -6,7 +6,7 @@ using UnityEngine;
 public class Dish : MonoBehaviour
 {
     //음식을 둘 수 있는 공간
-    protected GameObject DishPoint;
+    public GameObject DishPoint;
 
     //접시에 담긴 음식 리스트
     List<BaseFood> FoodList = new List<BaseFood>();

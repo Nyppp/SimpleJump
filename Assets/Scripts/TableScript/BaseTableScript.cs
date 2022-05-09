@@ -22,31 +22,41 @@ public class BaseTableScript : MonoBehaviour
 
     public virtual void TableFunction(GameObject Character)
     {
+        //플레이어가 물체를 집게 되는 지점인 grabpoint를 가져옴
+        GameObject grabPoint = Character.GetComponent<CharacterController>().GrabPoint;
+
         //상자에 있는 물체를 플레이어가 가져갈 때 동작
         if (DropPoint.transform.childCount > 0)
         {
-            if (Character.transform.GetChild(0).childCount == 0)
+            if (grabPoint.transform.childCount == 0)
             {
                 //음식일 경우, 조리중이 아닌 음식은 집을 수 있게 함
                 if (DropPoint.transform.GetChild(0).GetComponent<BaseFood>() != null)
                 {
                     if (DropPoint.transform.GetChild(0).GetComponent<BaseFood>().Grabable == true)
                     {
-                        DropPoint.transform.GetChild(0).parent = Character.transform.GetChild(0);
+                        DropPoint.transform.GetChild(0).parent = grabPoint.transform;
                     }
                 }
 
+                //테이블 위에 있는게 접시일 경우의 처리
                 else if (DropPoint.transform.GetChild(0).GetComponent<Dish>() != null)
                 {
-                    DropPoint.transform.GetChild(0).parent = Character.transform.GetChild(0);
+                    DropPoint.transform.GetChild(0).parent = grabPoint.transform;
+                }
+
+                else if(DropPoint.transform.GetChild(0).CompareTag("Grabable"))
+                {
+                    DropPoint.transform.GetChild(0).parent = grabPoint.transform;
                 }
             }
 
-            else if (Character.transform.GetChild(0).childCount > 0)
+            //플레이어가 음식을 두려 할 때, 테이블에 이미 접시가 있을 경우
+            else if (grabPoint.transform.GetChild(0).GetComponent<BaseFood>() != null)
             {
                 if (DropPoint.transform.GetChild(0).GetComponent<Dish>() != null)
                 {
-                    DropPoint.transform.GetChild(0).GetComponent<Dish>().PutInFood(Character.transform.GetChild(0).GetChild(0).GetComponent<BaseFood>());
+                    DropPoint.transform.GetChild(0).GetComponent<Dish>().PutInFood(grabPoint.transform.GetChild(0).GetComponent<BaseFood>());
                 }
             }
         }
@@ -54,11 +64,13 @@ public class BaseTableScript : MonoBehaviour
         //플레이어가 상자에 물체를 놓을 때 동작
         else
         {
-            if (Character.transform.GetChild(0).childCount > 0)
+            if (grabPoint.transform.childCount > 0)
             {
-                Character.transform.GetChild(0).GetChild(0).position = DropPoint.transform.position;
-                Character.transform.GetChild(0).GetChild(0).parent = DropPoint.transform;
+                grabPoint.transform.GetChild(0).position = DropPoint.transform.position;
+                grabPoint.transform.GetChild(0).parent = DropPoint.transform;
             }
         }
     }
+
+    public virtual void TableAction(GameObject Character) { return; }
 }

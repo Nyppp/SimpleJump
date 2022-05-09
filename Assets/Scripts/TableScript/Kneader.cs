@@ -22,24 +22,33 @@ public class Kneader : BaseTableScript
 
     public override void TableFunction(GameObject Character)
     {
+        GameObject grabPoint = Character.GetComponent<CharacterController>().GrabPoint;
+
         //냄비인 경우에만 화구에 올릴 수 있음
-        if (Character.transform.GetChild(0).childCount > 0)
+        if (grabPoint.transform.childCount > 0)
         {
-            if (Character.transform.GetChild(0).GetChild(0).GetComponent<Pod>() != null)
+            Pod pod = grabPoint.transform.GetChild(0).GetComponent<Pod>();
+            if (pod != null)
             {
-                Character.transform.GetChild(0).GetChild(0).position = DropPoint.transform.position;
-                Character.transform.GetChild(0).GetChild(0).parent = DropPoint.transform;
+                pod.transform.position = DropPoint.transform.position;
+                pod.transform.parent = DropPoint.transform;
             }
         }
 
         
         else
         {
-            if(Character.transform.GetChild(0).childCount == 0)
+            if(grabPoint.transform.childCount == 0)
             {
-                DropPoint.transform.GetChild(0).parent = Character.transform.GetChild(0);
+                DropPoint.transform.GetChild(0).parent = grabPoint.transform;
             }
         }
+    }
+
+    public override void TableAction(GameObject Character)
+    {
+        //반죽을 넣고 오븐을 돌리면 일정시간 이후 케이크가 되어 반환
+        return;
     }
 
 

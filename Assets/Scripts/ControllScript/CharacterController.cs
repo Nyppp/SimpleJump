@@ -16,8 +16,6 @@ public class CharacterController : MonoBehaviour
     public float ThrowSpeed = 100.0f;
     public GameObject GrabPoint;
 
-
-
     //레이캐스팅 변수
     RaycastHit Hit;
     public float HitDistance = 5.0f;
@@ -94,13 +92,13 @@ public class CharacterController : MonoBehaviour
         {
             //레이캐스트에 걸린 오브젝트가 상자 액터라면, 그 상자의 고유한 함수 실행
             //TableFunction은 가상함수로, 파생되는 자식 클래스마다 각자의 기능 존재
-            if(Hit.transform.gameObject.GetComponent<BaseTableScript>() != null)
+            if (Hit.transform.gameObject.CompareTag("Table"))
             {
                 Hit.transform.gameObject.GetComponent<BaseTableScript>().TableFunction(this.gameObject);
             }
 
             //오브젝트가 주울 수 있는 오브젝트라면, 플레이어에 부착
-            if(Hit.transform.gameObject.CompareTag("Grabable"))
+            else if(Hit.transform.gameObject.CompareTag("Grabable"))
             {
                 Hit.transform.parent = GrabPoint.transform;
             }
@@ -109,7 +107,7 @@ public class CharacterController : MonoBehaviour
         //현재 물체를 들고있을 때, 내려놓음
         else if (GrabPoint.transform.childCount > 0)
         {
-            if (GrabPoint.transform.GetChild(0).GetComponent<BaseFood>() != null)
+            if (GrabPoint.transform.GetChild(0).CompareTag("Grabable"))
             {
                 GrabPoint.transform.GetChild(0).parent = null;
             }
@@ -128,19 +126,26 @@ public class CharacterController : MonoBehaviour
                 GrabPoint.transform.GetChild(0).GetComponent<Rigidbody>().AddForce(ThrowDirection.normalized * ThrowSpeed);
                 GrabPoint.transform.GetChild(0).parent = null;
             }
+
+            //else 레이캐스트 시킨 물체가 소화기라면, 소화기 발사 동작
+            else if(GrabPoint.transform.GetChild(0).GetComponent<FireExtinguisher>() != null)
+            {
+                GrabPoint.transform.GetChild(0).GetComponent<FireExtinguisher>().Shot();
+            }
         }
         
         else
         {
-            //그 외에 식재료 손질(칼질) 동작
+            //그 외에 식재료 손질(칼질, 오븐 등의 조리)
             Vector3 CastPosition = transform.position - new Vector3(0, 0.5f, 0);
             if (Physics.Raycast(CastPosition, transform.forward, out Hit, HitDistance))
             {
-                if(Hit.transform.gameObject.GetComponent<KnifeTable>() != null)
+                if (Hit.transform.gameObject.GetComponent<BaseTableScript>() != null)
                 {
-                    Hit.transform.gameObject.GetComponent<KnifeTable>().KnifeFunction(this.gameObject);
+                    Hit.transform.gameObject.GetComponent<BaseTableScript>().TableAction(this.gameObject);
                 }
             }
         }
     }
+
 }

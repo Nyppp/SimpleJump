@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 1654266143095790890}
   m_Layer: 0
   m_Name: KnifeTable
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -344,6 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DropPoint: {fileID: 1654266143069156454}
   CookBar: {fileID: 1654266143585713067}
+  CutableFood: []
 --- !u!1 &1654266143585713109
 GameObject:
   m_ObjectHideFlags: 0
